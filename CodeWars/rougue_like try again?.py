@@ -27,8 +27,8 @@ class Character():
 
         """mod*strength+mod*dexterity+mod*intelligence+bonus_dmg=dmg""" # <-- formulae for calculating dmg
 
-        #wepon = "limbs" default but changes when ch.something_of_something called?"
-        damage= str_mod* self.str + dex_mod*self.dex + int_mod*self.int + bonus_dmg #default needs to be 32
+        #wepon = "limbs" default but changes when ch.something_of_something called? but still stores them, dict maybe?"
+        damage= str_mod* self.str + dex_mod*self.dex + int_mod*self.int + bonus_dmg #default needs to be 32. could be a func itself?
 
         # way of triggering string in event log for times and names called?#
 
@@ -54,3 +54,4 @@ class Character():
 
 ch = Character("Kroak", strength=11, dexterity=7)
 ch.character_info()
+#ch.axe_of_fire(3, 1, 0, 20) # weapon method name can be anything as long as it matches weapon_of_something
