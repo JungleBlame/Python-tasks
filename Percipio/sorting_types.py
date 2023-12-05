@@ -22,3 +22,122 @@
 # bigger until 1 large list is sorted uses O(N) space, not adaptive-no matter the list the order of operation is exactly the same, is stable
 #-------------------------------------------------------quick sort--------------------------------------------------------------#
 
+<<<<<<< HEAD
+=======
+# SELECTION SORT ON^2# 
+
+
+def print_list(num_list):
+    print(num_list)
+
+def selection_sort(original_list):
+
+    length = len(original_list)
+
+    for i in range(length): # <-- sets the index to the next in list
+
+        min_value_index = i
+
+        for j in range(i+1, length): # <-- gets them to check the number
+
+            if original_list[min_value_index] > original_list[j]:
+                min_value_index=j
+
+        original_list[i], original_list[min_value_index] = original_list[min_value_index], original_list[i] #<-- swaps them 
+
+        print("Sorted till index ", i)
+        print_list(original_list)
+
+    print("Sorted list: ")
+    print_list(original_list)
+
+num_list= [10,11,5,7,2,8,3,9,6,1,4]
+
+#selection_sort(num_list)
+
+"""
+ Sorted till index  0
+[1, 11, 5, 7, 2, 8, 3, 9, 6, 10, 4]
+Sorted till index  1
+[1, 2, 5, 7, 11, 8, 3, 9, 6, 10, 4]
+Sorted till index  2
+[1, 2, 3, 7, 11, 8, 5, 9, 6, 10, 4]
+Sorted till index  3
+[1, 2, 3, 4, 11, 8, 5, 9, 6, 10, 7]
+Sorted till index  4
+[1, 2, 3, 4, 5, 8, 11, 9, 6, 10, 7]
+Sorted till index  5
+[1, 2, 3, 4, 5, 6, 11, 9, 8, 10, 7]
+Sorted till index  6
+[1, 2, 3, 4, 5, 6, 7, 9, 8, 10, 11]
+
+Sorted till index  7
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] <-- is actually sorted at this point, but is not adaptive so doesn't know to stop
+
+Sorted till index  8
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Sorted till index  9
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Sorted till index  10
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Sorted list: 
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+ 
+ """       
+
+# BUBBLE SORT ON^2# 
+
+def bubble_sort (original_list):
+
+    length = len(original_list)
+    
+   
+
+        
+    for i in range(length - 1, 0, -1): # <-- iterations length of the list, but starts at last element to the first
+        
+        for index in range(i):
+            
+            if original_list[index] > original_list[index + 1]:
+                
+               
+                original_list[index + 1], original_list[index] = \
+                    original_list[index], original_list[index + 1]
+             
+
+        print("Unsorted till index: ", i-1)
+        print_list(original_list)
+
+student_marks = [88,99,34,32,43,25,29,45,49,37]
+#bubble_sort(student_marks)
+
+"""
+Unsorted till index:  8
+[88, 34, 32, 43, 25, 29, 45, 49, 37, 99]
+Unsorted till index:  7
+[34, 32, 43, 25, 29, 45, 49, 37, 88, 99]
+Unsorted till index:  6
+[32, 34, 25, 29, 43, 45, 37, 49, 88, 99]
+
+Unsorted till index:  5 <----- Again is already sorted but will still carry on due to length. Could add counter to stop byt counting swaps
+[32, 25, 29, 34, 43, 37, 45, 49, 88, 99]
+
+Unsorted till index:  4
+[25, 29, 32, 34, 37, 43, 45, 49, 88, 99]
+Unsorted till index:  3
+[25, 29, 32, 34, 37, 43, 45, 49, 88, 99]
+Unsorted till index:  2
+[25, 29, 32, 34, 37, 43, 45, 49, 88, 99]
+Unsorted till index:  1
+[25, 29, 32, 34, 37, 43, 45, 49, 88, 99]
+Unsorted till index:  0
+[25, 29, 32, 34, 37, 43, 45, 49, 88, 99]
+
+"""
+
+
+#MERGE SORT#
+
+
+
+>>>>>>> 0422d92 (Update)
