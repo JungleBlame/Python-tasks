@@ -132,4 +132,4 @@ def lose_func(answer_pass):
 
 greeting()
 
-random_num()
+random_num()  

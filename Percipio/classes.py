@@ -75,16 +75,18 @@ teacher2 = teacher("Ryan", "Giggs")
 #del teacher2.first <-- will delete the first name of student 2
 
 class competition:
-
+   
     raise_ammount=1.04
 
     def __init__(self,name, prize):
-
-        self.name=name
-        self.prize = prize
-
+        self.__name=name
+        self.__prize = prize
+    def get_name(self):
+        return self.__name
+    def get_prize(self):
+        return self.__prize
     def raise_prize(self):
-        self.prize=self.prize * competition.raise_ammount # need to reference like this or it cannot find it as it is in the class
+        self.__prize=self.__prize * competition.raise_ammount # need to reference like this or it cannot find it as it is in the class
 
 debate = competition("debate",500)
 #print(debate.raise_ammount)
@@ -114,9 +116,26 @@ simulation.raise_prize()
 # <attribute '__dict__' of 'competition' objects>, '__weakref__': <attribute '__weakref__' of 'competition' 
 # objects>, '__doc__': None}
 
-racing=competition("racing",1000)
-racing.raise_ammount
-competition.raise_ammount = 1.05
+class racing (competition):
+    def __init__ (self, name, prize, country):
+        super().__init__(name, prize)  #<---reference the parent class competition, invokes other methods in th eparent. so will use the name prize in competition
+        self.__country=country
+    def get_country(self):
+        return self.__country
+
+racing= racing ("10km", 7500, "USA")
+print(racing.get_country())
+print(racing.get_name(),racing.get_prize())  #<-- these aren't in the racing class but the super means they pull form the parent competition
+
+
+
+
+
+
+
+
+
+
 #print(competition.raise_ammount)
 #print(simulation.raise_ammount) <-- changes in all as its the class that has been effected
 
@@ -217,7 +236,7 @@ s1 = student("Toby", 2.0)
 s1.add_clubs("Swimming")
 
 #s1.print_details()
-
+"""
 student_details_list = [
     {"name": "Nina","gpa": 3.6,"clubs": ["tennis","chess"]},
     {"name": "Emily","gpa": 3.9,"clubs":["tennis","chess"], "active":False},
@@ -247,3 +266,4 @@ def get_students(student_details_list):
 
 
 get_students(student_details_list)
+"""
