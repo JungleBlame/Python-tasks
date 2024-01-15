@@ -128,7 +128,7 @@ class VersionManager:
         """Rollsback though ver history, raises exception if cannot"""
 
         if len(self.history)==1:
-                raise Exception ("Cannot rollback!")
+                raise Exception ("Cannot rollback!")    
             
         else:
 

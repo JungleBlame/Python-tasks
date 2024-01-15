@@ -149,67 +149,107 @@ def snail(snail_map):
         return []
     else:
 
-        middle_index=find_middle_element(snail_map)
-        snail_result=snail_sort(snail_map,middle_index)
+        snail_result=snail_sort(snail_map)
         return snail_result
-
-def find_middle_element(snail_map):
-
-    middle_element=[]
-    middle_index=""
-
-    for listy in snail_map:
-        for nums in listy:
-            middle_element.append(nums)
-            middle_index= middle_index+str(nums)
-
-    #print(middle_element)
-    #print(middle_index)
-    middle_index=len(middle_element)//2
-    #print(middle_index)
     
-    
-    return middle_index
-    
-def snail_sort(snail_map,middle_index):
+def snail_sort(snail_map):
 
     snail_result=[]
-    snail_reversed=[]
-    odd_even=0
-    for listy in snail_map:
-        if odd_even%2==0:
-            for nums in listy:
-                snail_result.append(nums)
-                odd_even+=1
-        elif odd_even%2!=0:
-            for nums in reversed(listy):
-                snail_result.append(nums)
-                odd_even+=1
-
-    snail_result=snail_result[0:middle_index]
-   
-
-    odd_even=0
-    for listy in reversed(snail_map):
-        if odd_even%2==0:
-            for nums in reversed(listy):
-                snail_reversed.append(nums)
-                odd_even+=1
-        elif odd_even%2!=0:
-            for nums in listy:
-                snail_reversed.append(nums)
-                odd_even+=1
-
-    snail_reversed=snail_reversed[0:middle_index+1]
+    switch=1
+    index_list=None
     
-    #print(snail_reversed)
-    #print(snail_result)
+    while len(snail_map) !=0:
+        index_last=snail_map.index(snail_map[-1])
 
-    snail_result=snail_result+snail_reversed
-    #print(snail_result)
+        if switch==1:   
+            for listy in snail_map:
+                index_list=snail_map.index(listy)
+                
+                if snail_map.index(listy)==0:
+
+                    for nums in listy:
+                        snail_result.append(nums)
+
+                elif snail_map.index(listy)==index_last:
+
+                    for nums in reversed(listy):
+                        snail_result.append(nums)
+                    switch=2
+
+                else:
+                        snail_result.append(listy[-1])
+                        snail_map[index_list].pop(-1)
+
+            if len(snail_map) !=0:
+                snail_map.pop(0)
+            if len(snail_map) !=0:
+                snail_map.pop(-1)
+
+        elif switch==2:
+    
+            for listy in reversed(snail_map):
+                index_list=snail_map.index(listy)
+                if snail_map.index(listy)==0:
+                    switch=1
+                    
+                else:
+
+                    snail_result.append(listy[0])
+                    snail_map[index_list].pop(0)
+                        
+
     return snail_result
 
-print(snail([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15], [16, 17, 18, 19, 20], [21, 22, 23, 24, 25]]))
+print(snail([[1, 2, 3, 4, 5], 
+             [6, 7, 8, 9, 10], 
+             [11, 12, 13, 14, 15], 
+             [16, 17, 18, 19, 20], 
+             [21, 22, 23, 24, 25]]))
 
 # should be -> [1, 2, 3, 4, 5, 10, 15, 20, 25, 24, 23, 22, 21, 16, 11, 6, 7, 8, 9, 14, 19, 18, 17, 12, 13]
 # currently -> [1, 2, 3, 4, 5, 10, 9, 8, 7, 6, 11, 12, 25, 24, 23, 22, 21, 16, 17, 18, 19, 20, 15, 14, 13]
+
+"""
+Other answers:
+
+def snail(array):
+    out = []
+    while len(array):
+        out += array.pop(0)
+        array = list(zip(*array))[::-1] # Rotate
+    return out
+#--------------------------------------------------------------------------------------------------------------------------------#
+
+def snail(array):
+    res = []
+    while len(array) > 1:
+        res = res + array.pop(0)
+        res = res + [row.pop(-1) for row in array]
+        res = res + list(reversed(array.pop(-1)))
+        res = res + [row.pop(0) for row in array[::-1]]
+    return res if not array else res + array[0]
+
+#----------------------------------------------------------------------------------------------------------------------------------#
+def snail(array):
+    #base case for recursion with n odd
+    if len(array)==1: return array[0]
+    #base case for recursion with n even
+    if len(array)==2: return array[0]+array[1][::-1]
+    res=[] #accumulator variable for my result
+    #I go on "shaving" the array and taking what I need as a result
+    #getting the first row
+    res+=array.pop(0)
+    #getting the last element of every remaining row but the last
+    for i in range(len(array)-1):
+        res.append(array[i].pop(-1))
+    #getting the last one - reversed
+    res+=array.pop(-1)[::-1]
+    #and getting the first element of the remaining rows in reverse order
+    for i in range(-1,-len(array),-1):
+        res.append(array[i].pop(0))
+    #calling recursively the function with a smaller array
+    return res+snail(array)
+    #usually I avoid recursive solutions, but I decided to try my hand
+    #in a while with them. I hope you enjoyed reading my code :)
+
+"""
